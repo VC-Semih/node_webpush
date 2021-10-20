@@ -12,14 +12,10 @@ function registerServiceWorker(){
                     registration.pushManager.subscribe(options).then(
                         function(pushSubscription) {
                             console.log(pushSubscription.endpoint);
-                            // The push subscription details needed by the application
-                            // server are now available, and can be sent to it using,
-                            // for example, an XMLHttpRequest.
+                            req.open("POST", '/api/save-subscription')
+                            req.setRequestHeader('Content-Type', 'application/json');
+                            req.send(JSON.stringify({endpoint: pushSubscription.endpoint}))
                         }, function(error) {
-                            // During development it often helps to log errors to the
-                            // console. In a production environment it might make sense to
-                            // also report information about errors back to the
-                            // application server.
                             console.log(error);
                         });
             console.log('Service worker successfully registered')
@@ -49,3 +45,5 @@ function urlBase64ToUint8Array(base64String) {
     }
     return outputArray;
 }
+
+let req = new XMLHttpRequest();
