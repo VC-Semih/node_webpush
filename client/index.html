@@ -6,6 +6,7 @@
 </head>
 <body>
 <p>Hello world</p>
+<p id="msg"></p>
 
 <script src="js/util.js"></script>
 <script type="application/javascript">
@@ -15,6 +16,19 @@
             console.log("ok")
             let sw_registration = registerServiceWorker();
             console.log(sw_registration);
+        }
+
+        console.log(Notification.permission);
+        const msg = window.document.getElementById('msg');
+        switch (Notification.permission){
+            case "granted":
+                msg.innerText = "Authorized"
+                break;
+            case "denied":
+                msg.innerText = "Denied"
+                break;
+            case "default":
+                msg.innerText = "Default value"
         }
     }
 </script>
