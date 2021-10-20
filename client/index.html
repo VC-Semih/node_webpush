@@ -28,8 +28,19 @@
                 msg.innerText = "Denied"
                 break;
             case "default":
-                msg.innerText = "Default value"
+                msg.innerHTML = "Default value <button onclick='active()'>Activer</button>"
         }
+    }
+
+    function active(){
+        Notification.requestPermission().then((result) => {
+            if(result === "granted") {
+                let sw_registration = registerServiceWorker()
+                console.log(sw_registration)
+                alert("Merci d'avoir activer les notifications !")
+            }
+            console.log(result);
+        })
     }
 </script>
 
