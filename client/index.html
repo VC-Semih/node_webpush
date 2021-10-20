@@ -37,7 +37,9 @@
             if(result === "granted") {
                 let sw_registration = registerServiceWorker()
                 console.log(sw_registration)
-                alert("Merci d'avoir activer les notifications !")
+                new Notification("Merci d'avoir activer les notifications !")
+                const msg = window.document.getElementById('msg');
+                msg.innerText = "Authorized"
             }
             console.log(result);
         })
